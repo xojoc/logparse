@@ -41,7 +41,7 @@ type Entry struct {
 	Request *http.Request
 	// The HTTP status code returned to the client (-1 if unknown).
 	Status int
-	// The size in bytes of the data sent to the client (-1 if unknown).
+	// The size in bytes of the data sent to the client (0 if no data sent).
 	Bytes int
 	// The URL of the host the client comes from (nil if unknown).
 	Referer *url.URL
@@ -91,11 +91,7 @@ func (e *Entry) String() string {
 	}
 	s += " "
 
-	if e.Bytes < 0 {
-		s += "-"
-	} else {
-		s += strconv.Itoa(e.Bytes)
-	}
+	s += strconv.Itoa(e.Bytes)
 	s += " "
 
 	if e.Referer == nil {
