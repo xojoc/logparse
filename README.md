@@ -9,6 +9,7 @@ go get github.com/xojoc/logparse
 *logparse* is simple to use. First parse a string with either [logparse.Common](http://godoc.org/github.com/xojoc/logparse#Common) or [logparse.Combined](http://godoc.org/github.com/xojoc/logparse#Combined) and then access the field of [logparse.Entry](http://godoc.org/github.com/xojoc/logparse#Entry) for the required information. Examples:
  * [Common log format](http://godoc.org/github.com/xojoc/logparse#example-Common)
  * [Combined log format](http://godoc.org/github.com/xojoc/logparse#example-Combined)
+
 see [godoc](http://godoc.org/github.com/xojoc/logparse) for the complete documentation.
 
 # Log formats
