@@ -29,11 +29,11 @@ import (
 
 const timeLayout = "02/Jan/2006:15:04:05 -0700"
 
-// An Entry represents a log entry
+// An Entry represents a log entry.
 type Entry struct {
 	// The IP of the client which made the request (nil if unknown).
 	Host net.IP
-	// The username of the logged in user making the request (empty if non).
+	// The username of the logged in user making the request (empty if anonymous).
 	User string
 	// The time the request was made (zero value if unknown, check with IsZero).
 	Time time.Time
@@ -50,6 +50,7 @@ type Entry struct {
 	//	Cookies   map[string]string
 }
 
+// Formats the Entry e in the combined log format.
 func (e *Entry) String() string {
 	s := ""
 
@@ -124,7 +125,7 @@ func nextField(l *lex, sep string) (string, error) {
 func expect(l *lex, sep rune) error {
 	if !l.match(string(sep)) {
 		r := l.next()
-		if r == EOF {
+		if r == eof {
 			return fmt.Errorf("expected %q but got EOF", sep)
 		} else {
 			return fmt.Errorf("%d: expected %q but got %q", l.ColumnNumber()-1, sep, r)
@@ -209,19 +210,26 @@ func common(l *lex) (*Entry, error) {
 // An entry in the common log format has the form:
 //  Host - User Time Request Status Bytes
 // where:
-//  Host is the ip of the client which made the request
-//  - this field is unused
-//  User is the name of the logged in user doing the request
-//  Time is the time the request was made
-//  Request is the HTTP request line from the client
-//  Status is the status code returned to the client
-//  Bytes is the size in bytes of the data sent to the client
+//  Host is the ip of the client which made the request.
+//  - this field never is used.
+//  User is the name of the logged in user doing the request.
+//  Time is the date/time/zone the request was made.
+//  Request is the HTTP request line from the client.
+//  Status is the status code returned to the client.
+//  Bytes is the size in bytes of the data sent to the client.
 func Common(line string) (*Entry, error) {
 	l := newLex(line)
 	e, err := common(l)
 	return e, err
 }
 
+// Combined parses a log line containing a log entry in the combined log format.
+//
+// An entry in the combined log format has the form:
+//  Host - User Time Request Status Bytes Referer UserAgent
+// basicaly it's the same as the common log format with the added fields:
+//  Referer the URL of the host the client comes from
+//  UserAgent the user agent of the client
 func Combined(line string) (*Entry, error) {
 	l := newLex(line)
 	e, err := common(l)

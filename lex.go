@@ -16,13 +16,11 @@
 package logparse
 
 import (
-	"fmt"
-	"io"
 	"strings"
 	"unicode/utf8"
 )
 
-const EOF rune = -1
+const eof rune = -1
 
 type lex struct {
 	s     string
@@ -37,7 +35,7 @@ func newLex(s string) *lex {
 
 func (l *lex) next() (r rune) {
 	if l.p >= len(l.s) {
-		return EOF
+		return eof
 	}
 	r, l.width = utf8.DecodeRuneInString(l.s[l.p:])
 	l.p += l.width
@@ -71,14 +69,15 @@ func (l *lex) match(m string) bool {
 	return true
 }
 
-func Expect(l *lex, sep string) bool {
+/*
+func expect(l *lex, sep string) bool {
 	if l.err != nil {
 		return false
 	}
 
 	if !l.match(sep) {
 		r := l.next()
-		if r == EOF {
+		if r == eof {
 			//			setErr(fmt.Errorf("expected %q but got EOF", sep))
 			l.setErr(io.EOF)
 			return false
@@ -89,6 +88,7 @@ func Expect(l *lex, sep string) bool {
 	}
 	return true
 }
+*/
 
 func (l *lex) span(m string) (string, bool) {
 	i := strings.Index(l.s[l.p:], m)
