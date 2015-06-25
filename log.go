@@ -13,18 +13,19 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-package logparse
+// Package logparse parses a log entry in the most common formats.
+package logparse // import "xojoc.pw/logparse"
 
 import (
 	"bufio"
 	"fmt"
-	"github.com/xojoc/useragent"
 	"net"
 	"net/http"
 	"net/url"
 	"strconv"
 	"strings"
 	"time"
+	"xojoc.pw/useragent"
 )
 
 const timeLayout = "02/Jan/2006:15:04:05 -0700"
@@ -47,7 +48,6 @@ type Entry struct {
 	Referer *url.URL
 	// The user agent of the client (nil if unknown).
 	UserAgent *useragent.UserAgent
-	//	Cookies   map[string]string
 }
 
 // Formats the Entry e in the combined log format.
@@ -241,9 +241,11 @@ func Combined(line string) (*Entry, error) {
 	if err != nil {
 		return nil, err
 	}
-	e.Referer, err = url.ParseRequestURI(ref)
-	if err != nil {
-		return nil, err
+	if ref != `-` {
+		e.Referer, err = url.ParseRequestURI(ref)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	err = expect(l, '"')
