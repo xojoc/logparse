@@ -65,6 +65,6 @@ func ExampleCombined() {
 	//200
 	//2326
 	//http://xojoc.pw
-	//firefox
-	//gnu/linux
+	//Firefox
+	//GNU/Linux
 }
