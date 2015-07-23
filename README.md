@@ -4,7 +4,7 @@
 # Usage
 First install the library with:
 ```
-go get github.com/xojoc/logparse
+go get xojoc.pw/logparse
 ```
 *logparse* is simple to use. First parse a string with either [logparse.Common](http://godoc.org/xojoc.pw/logparse#Common) or [logparse.Combined](http://godoc.org/xojoc.pw/logparse#Combined) and then access the field of [logparse.Entry](http://godoc.org/xojoc.pw/logparse#Entry) for the required information. Examples:
  * [Common log format](http://godoc.org/xojoc.pw/logparse#example-Common)
