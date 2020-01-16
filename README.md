@@ -16,7 +16,7 @@ see [godoc](http://godoc.org/xojoc.pw/logparse) for the complete documentation.
 Right now *logparse* can parse the common and combined log formats. Support is under way for the extended log format.
 
 # Who?
-*logparse* was written by Alexandru cojocaru (http://xojoc.pw).
+*logparse* was written by [Alexandru Cojocaru](http://xojoc.pw).
 
 # License
 *logparse* is released under the GPLv3 or later, see [COPYING](COPYING).
