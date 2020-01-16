@@ -19,4 +19,4 @@ Right now *logparse* can parse the common and combined log formats. Support is u
 *logparse* was written by [Alexandru Cojocaru](http://xojoc.pw).
 
 # License
-*logparse* is released under the GPLv3 or later, see [COPYING](COPYING).
+*logparse* is released under the GPLv3 or later, see [COPYING](https://github.com/xojoc/logparse/blob/master/COPYING).
